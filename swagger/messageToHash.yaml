@@ -1,0 +1,126 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/scrumpi3/messageToHash/1.0.0
+info:
+  description: |
+    This is a sample set of hashing services.
+  version: "1.0.0"
+  title: Hashing Service
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: beckmann.benjamin@gmail.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+tags:
+  - name: messages
+    description: Two way message hashing service
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+paths:
+  /messages:
+    post:
+      tags:
+        - messages
+      summary: Add a new pet to the store
+      operationId: addPet
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+      requestBody:
+        $ref: '#/components/requestBodies/Hash'
+
+  '/messages/{hash}':
+    get:
+      tags:
+        - messages
+      summary: Find message by hash
+      description: Returns a single message
+      operationId: getMsgByHash
+      parameters:
+        - name: hash
+          in: path
+          description: Hash of message to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hash'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Hash'
+        '400':
+          description: Invalid message
+        '404':
+          description: Message not found
+      security:
+        - api_key: []
+
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Hash:
+      type: object
+      required:
+        - digest
+      properties:
+        digest:
+          type: string
+          example: HASH_CODE-24cf462ab47f123deadbeaf8675309deadbeaf8675309
+  requestBodies:
+    Hash:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hash'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Hash'
+      description: Pet object that needs to be added to the store
+      required: true
+    UserArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+      description: List of user object
+      required: true
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
