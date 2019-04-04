@@ -4,6 +4,7 @@ import hashlib
 
 from swagger_server.models.hash import Hash  # noqa: E501
 from swagger_server.models.message import Message  # noqa: E501
+from swagger_server.models.error import Error  # noqa: E501
 from swagger_server import util
 
 hashDictionary = {}
@@ -25,7 +26,7 @@ def add_message(body):  # noqa: E501
     hasher.update(message)
     hashDigest = hasher.hexdigest()
     hashDictionary[hashDigest] = message
-    return hashDigest
+    return Hash(hashDigest)
 
 
 def get_msg_by_hash(hash):  # noqa: E501
@@ -38,6 +39,11 @@ def get_msg_by_hash(hash):  # noqa: E501
 
     :rtype: Message
     """
-    storedMessage = hashDictionary[hash].decode("utf-8")
-    returnedValue =  Hash(storedMessage)
+    storedMessage=""
+    try:
+        storedMessage = hashDictionary[hash].decode("utf-8")
+    except:
+        return Error('Message not Found'), 404
+    
+    returnedValue =  Message(storedMessage)
     return returnedValue
