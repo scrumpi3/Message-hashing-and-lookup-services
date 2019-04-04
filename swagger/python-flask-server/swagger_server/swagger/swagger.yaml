@@ -11,7 +11,7 @@ info:
     name: "MIT"
     url: "https://opensource.org/licenses/MIT"
 host: "localhost"
-basePath: "/v2"
+basePath: "/"
 tags:
 - name: "messages"
   description: "Two way message hashing service"
@@ -20,12 +20,16 @@ paths:
     post:
       tags:
       - "messages"
-      summary: "Add a new pet to the store"
+      summary: "Add a new message to the store"
       operationId: "add_message"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
       - in: "body"
         name: "body"
-        description: "order placed for purchasing the pet"
+        description: "message to store"
         required: true
         schema:
           $ref: "#/definitions/Message"
@@ -44,6 +48,8 @@ paths:
       summary: "Find message by hash"
       description: "Returns a single message"
       operationId: "get_msg_by_hash"
+      produces:
+      - "application/json"
       parameters:
       - name: "hash"
         in: "path"

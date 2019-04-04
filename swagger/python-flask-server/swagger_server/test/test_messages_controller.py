@@ -16,11 +16,11 @@ class TestMessagesController(BaseTestCase):
     def test_add_message(self):
         """Test case for add_message
 
-        Add a new pet to the store
+        Add a new message to the store
         """
         body = Message()
         response = self.client.open(
-            '/v2/messages',
+            '//messages',
             method='POST',
             data=json.dumps(body),
             content_type='application/json')
@@ -33,7 +33,7 @@ class TestMessagesController(BaseTestCase):
         Find message by hash
         """
         response = self.client.open(
-            '/v2/messages/{hash}'.format(hash='hash_example'),
+            '//messages/{hash}'.format(hash='hash_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
