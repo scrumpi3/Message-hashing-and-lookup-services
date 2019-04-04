@@ -1,0 +1,83 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a sample set of hashing services.\n"
+  version: "1.0.0"
+  title: "Hashing Service"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "beckmann.benjamin@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "localhost"
+basePath: "/v2"
+tags:
+- name: "messages"
+  description: "Two way message hashing service"
+paths:
+  /messages:
+    post:
+      tags:
+      - "messages"
+      summary: "Add a new pet to the store"
+      operationId: "add_message"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "order placed for purchasing the pet"
+        required: true
+        schema:
+          $ref: "#/definitions/Message"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Hash"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.messages_controller"
+  /messages/{hash}:
+    get:
+      tags:
+      - "messages"
+      summary: "Find message by hash"
+      description: "Returns a single message"
+      operationId: "get_msg_by_hash"
+      parameters:
+      - name: "hash"
+        in: "path"
+        description: "Hash of message to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: "Invalid message"
+        404:
+          description: "Message not found"
+      x-swagger-router-controller: "swagger_server.controllers.messages_controller"
+definitions:
+  Hash:
+    type: "object"
+    required:
+    - "digest"
+    properties:
+      digest:
+        type: "string"
+        example: "HASH_CODE-24cf462ab47f123deadbeaf8675309deadbeaf8675309"
+    example:
+      digest: "HASH_CODE-24cf462ab47f123deadbeaf8675309deadbeaf8675309"
+  Message:
+    type: "object"
+    required:
+    - "message"
+    properties:
+      message:
+        type: "string"
+        example: "foo"
+    example:
+      message: "foo"
