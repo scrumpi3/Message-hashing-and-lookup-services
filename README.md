@@ -3,7 +3,7 @@
 Benjamin Beckmann's Software Engineering Coding Challenge Solutions
 
 
-The codeboase consists of two challenge programming questions
+The codebase consists of two challenge programming questions
 - [Challenge #1][ch_1]: Message hashing and lookup services
 - [Challange #2][ch_2]: Find best two items to consume the most of a gift card balance. 
 
