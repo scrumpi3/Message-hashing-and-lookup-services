@@ -29,7 +29,7 @@ setup(
     entry_points={
         'console_scripts': ['swagger_server=swagger_server.__main__:main']},
     long_description="""\
-    This is a sample set of hashing services. 
+    This is a sample set of hashing services.
     """
 )
 

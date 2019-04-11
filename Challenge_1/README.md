@@ -9,7 +9,7 @@ The service interfaces were defined in Challenge #1 through two endpoints.
 1. /messages takes a message (a string) as a POST and returns the SHA256 hash digest of that
 message (in hexadecimal format)
 2. /messages/&lt;hash> is a GET request that returns the original message. A request to a non-existent
-<hash> should return a 404 error.
+&lt;hash> should return a 404 error.
 
 These service interfaces were enough information to build a YAML file, which is available at [messageToHash.yaml][messageToHash].  
 This YAML file was used by [Swagger] to generate a Python Flask server. 
@@ -19,7 +19,7 @@ Additional information on building and running the server is available in the [p
 ## Questions
 ### Scaling
 What would the bottleneck(s) be in your implementation as you acquire more users? 
-> The current implementation uses are single container to deploy an set of services to an in memory Flask server.
+> The current implementation uses are single container to deploy a set of services to an in-memory Flask server.
 > This solution has mutltiple bottlenecks.
 > 1. All user requests are handled by a single server instance, limiting the number of requests that can be handled per unit time.
 > 2. All user requests are implemented as syncriounious blocking functions, therefore a request must be processed completely before another request can be handled by the same processing unit.
@@ -36,9 +36,9 @@ How you might scale your microservice?
 
 ### Deployment
 How would you improve your deployment process if you needed to maintain this application long term?
-> Currenlty, the deployment process is a single package, all contained in one Docker file.
-> To improve the deployment process, I would device the system into multiple layers and spend time defining the interface between each layer.
-> This layered abstraction would allow for the seperation of concerns and loosly coupled system, where the failure of a single component will not take down the entire system.
+> Currently, the deployment process is a single package, all contained in one Docker file.
+> To improve the deployment process, I would design a system with multiple layers and spend time defining the interface between each layer.
+> A layered abstraction allows for seperation of concerns and a loosly coupled system, where the failure of a single component will not disrupt the entire system.
 
 License
 ----

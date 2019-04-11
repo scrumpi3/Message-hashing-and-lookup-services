@@ -15,7 +15,7 @@ class Message(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, message: str=None):  # noqa: E501
+    def __init__(self, message: str=""):  # noqa: E501
         """Message - a model defined in Swagger
 
         :param message: The message of this Message.  # noqa: E501

@@ -1,1 +1,1 @@
-docker run -p 80:8080 swagger_server
+docker run -p 8080:8080 swagger_server
