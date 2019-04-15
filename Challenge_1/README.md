@@ -19,7 +19,7 @@ Additional information on building and running the server is available in the [p
 ## Questions
 ### Scaling
 What would the bottleneck(s) be in your implementation as you acquire more users? 
-> The current implementation uses are single container to deploy a set of services to an in-memory Flask server.
+> The current implementation uses are single container, to deploy a set of services, to an in-memory Flask server.
 > This solution has mutltiple bottlenecks.
 > 1. All user requests are handled by a single server instance, limiting the number of requests that can be handled per unit time.
 > 2. All user requests are implemented as syncriounious blocking functions, therefore a request must be processed completely before another request can be handled by the same processing unit.
@@ -29,10 +29,11 @@ What would the bottleneck(s) be in your implementation as you acquire more users
 How you might scale your microservice?
 > I would optimize my microservices for concurrency and data partitioning to improve performance at scale.
 > I would also design in additional layers to support security, identity, load balancing, and data storage. 
-> These additional layers would allow for system protections, like DDoS, through white and black listing in the security layer.
-> Identification of individuals, using indenties provided by other entities, in the identity layer.
-> Increse the number of requests that can be handled through the replication of microservices in multiple containers/servers behind a load balancer.
-> Divide the data storage layer into read only data replicas for handling the GET requests, and master writable replicated data stores to handle the POST requests.
+> These additional layers would allow for system protections, 
+> 1. like DDoS, through white and black listing in the security layer.
+> 2. Identification of individuals, using indenties provided by other entities, in the identity layer.
+> 3. Increse the number of requests that can be handled through the replication of microservices in multiple containers/servers behind a load balancer.
+> 4. Divide the data storage layer into read only data replicas for handling the GET requests, and master writable replicated data stores to handle the POST requests.
 
 ### Deployment
 How would you improve your deployment process if you needed to maintain this application long term?
