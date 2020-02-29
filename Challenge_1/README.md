@@ -1,4 +1,4 @@
-# Simple Hash Service
+# Message hashing and lookup services
 
 Message hashing and lookup services
 
