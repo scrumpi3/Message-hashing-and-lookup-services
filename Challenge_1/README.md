@@ -1,4 +1,4 @@
-# Challenge #1
+# Simple Hash Service
 
 Message hashing and lookup services
 
